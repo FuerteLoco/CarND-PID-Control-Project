@@ -9,10 +9,11 @@ public:
   double p_error;
   double i_error;
   double d_error;
+  double total_cte;
 
   /*
   * Coefficients
-  */ 
+  */
   double Kp;
   double Ki;
   double Kd;
@@ -41,6 +42,11 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+
+  /*
+  * Calculate the output value.
+  */
+  double Calculate();
 };
 
 #endif /* PID_H */

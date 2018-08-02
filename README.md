@@ -3,6 +3,33 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Coefficients search
+
+I started using PID coefficients from "PID Implementation" example in course notes, which were K_p = 0.2, K_i = 0.004 and K_d = 3.0. It turned out that these values are a good starting point. To determine better values, I checked total cross-track error after 200 frames. This was done manually and yielded following results:
+
+| K_p | K_i | K_d | Total error |
+| :---: | :---: | :---: | :---: |
+| 0.2 | 0.004 | 3.0 | 50.1178 |
+| 0.3 | 0.004 | 3.0 | 36.163 |
+| 0.4 | 0.004 | 3.0 | 33.2077 |
+| 0.4 | 0.005 | 3.0 | 34.8393 |
+| 0.4 | 0.003 | 3.0 | 30.6021 |
+| 0.4 | 0.003 | 4.0 | 29.1781 |
+| 0.4 | 0.003 | 5.0 | 27.4459 |
+| 0.4 | 0.003 | 6.0 | 28.6702 |
+| 0.5 | 0.003 | 5.0 | 27.0639 |
+| 0.5 | 0.002 | 5.0 | 25.34 |
+
+Although the total error decreased over time, the resulting driving behaviour was not satisfying for the whole track. The vehicle steering sometimes was too hectic. I tried to play with different values keeping in mind their usage:
+
+* K_p: lower the distance to middle of track proportionally
+* K_i: lower the sum of cross-track errors over time
+* K_d: lower the distance to middle of track in respect to the distance from last step
+
+But in the end I stayed with the first parameter set, which gave the best driving behaviour for all examined values. I think 200 frames for determining total cross-track error is not enough. It should be calculated over whole track, but this was not feasible for manual tuning.
+
+---
+
 ## Dependencies
 
 * cmake >= 3.5
